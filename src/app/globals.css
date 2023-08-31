@@ -1,3 +1,4 @@
+/*
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -15,13 +16,133 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+*/
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: black;
+  color: white;
+}
+
+h1 {
+  text-align: center;
+}
+
+button {
+  background-color: #4A55A2;
+  color: white;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: .5rem;
+}
+
+/*EXPENSE FORM PAGE */
+
+.expense-form {
+  position: relative;
+  background: black;
+  color: white;
+  border: 1px solid white;
+  padding: 2rem;
+  margin: 1rem;
+  border-radius: .5rem;
+  font-family: Arial;
+}
+
+.form-control {
+  border: 1px solid white;
+  padding: 2rem;
+  margin: 1rem;
+  border-radius: .5rem;
+}
+
+
+.error {
+  color: red;
+  text-align: left;
+}
+
+.submit-modal {
+  
+  background: white;
+  color: black;
+  border: 1px solid black;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: .5rem;
+  font-family: Arial;
+  position: absolute;
+  left: 50%;
+  bottom: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  
+}
+
+/*TOUR FORM */
+
+.tour-form {
+  position: relative;
+  background: white;
+  color: black;
+  border: 1px solid black;
+  padding: 2rem;
+  margin: 1rem;
+  border-radius: .5rem;
+  font-family: Arial;
+}
+
+
+.modal {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+
+}
+
+/* TOUR PAGE */
+.tour-page {
+  position: relative;
+  background: white;
+  color: black;
+  border: 1px solid black;
+  padding: 2rem;
+  margin: 1rem;
+  border-radius: .5rem;
+  font-family: Arial;
+}
+
+/* EVENT PAGE */
+.event-page {
+  position: relative;
+  background: white;
+  color: black;
+  border: 1px solid black;
+  padding: 2rem;
+  margin: 1rem;
+  border-radius: .5rem;
+  font-family: Arial;
+}
+
+
+/* LEDGER */
+.ledger-list {
+  display: flex;
+  justify-content: center;
+
+
+}
+
+.ledger-item {
+  margin: 1rem;
+}
+
+
+
+/*TEMPORARY */
+
+.clickable {
+  color: purple;
+  text-decoration: underline;
 }

@@ -1,0 +1,73 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = "darwin-arm64"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Tours {
+  id           String          @id @default(uuid())
+  created_at   DateTime        @default(now())
+  updated_at   DateTime        @updatedAt
+  name         String
+  start_date   DateTime
+  end_date     DateTime
+  region       String?
+  billing_type String?
+  other_bands  String?
+  notes        String?
+  events       Events[]
+  accounts     AccountLedger[]
+}
+
+model Events {
+  id           String          @id @default(uuid())
+  created_at   DateTime        @default(now())
+  updated_at   DateTime        @updatedAt
+  name         String
+  location     String
+  venue        String
+  event_date   DateTime
+  all_ages     Boolean         @default(false)
+  billing_type String?
+  other_bands  String?
+  attendance   Int?
+  notes        String?
+  tour_id      String?
+  tour         Tours?          @relation(fields: [tour_id], references: [id])
+  accounts     AccountLedger[]
+
+  @@index([tour_id])
+}
+
+model TestEvents {
+  id         String   @id @default(uuid())
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  name       String
+}
+
+model AccountLedger {
+  id           String   @id @default(uuid())
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+  account_type String
+  category     String
+  subcategory  String
+  value        Int
+  tour_id      String?
+  tour         Tours?   @relation(fields: [tour_id], references: [id])
+  event_id     String?
+  event        Events?  @relation(fields: [event_id], references: [id])
+  notes        String?
+
+  @@index([tour_id])
+  @@index([event_id])
+}
