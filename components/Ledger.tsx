@@ -49,33 +49,25 @@ const Ledger = () => {
       <div className="ledger-item">
         <h2>Account Type</h2>
         {ledgerData.map((entry) => (
-          <div>
-            <p key={entry.account_type}>{entry.account_type}</p>
-          </div>
+          <p key={entry.account_type}>{entry.account_type}</p>
         ))}
       </div>
       <div className="ledger-item">
         <h2>Category</h2>
         {ledgerData.map((entry) => (
-          <div>
-            <p key={entry.category}>{entry.category}</p>
-          </div>
+          <p key={entry.category}>{entry.category}</p>
         ))}
       </div>
       <div className="ledger-item">
         <h2>Subcategory</h2>
         {ledgerData.map((entry) => (
-          <div>
-            <p key={entry.subcategory}>{entry.subcategory}</p>
-          </div>
+          <p key={entry.subcategory}>{entry.subcategory}</p>
         ))}
       </div>
       <div className="ledger-item">
         <h2>Value</h2>
         {ledgerData.map((entry) => (
-          <div>
-            <p key={entry.value}>{entry.value}</p>
-          </div>
+          <p key={entry.value}>{entry.value}</p>
         ))}
       </div>
     </div>

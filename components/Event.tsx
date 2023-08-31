@@ -30,25 +30,9 @@ interface EventProps {
 }
 
 const Event = ({ open, onClose, data }: EventProps) => {
-  const [eventData, setEventData] = useState({
-    name: "",
-    id: "",
-    venue: "",
-    all_ages: false,
-    billing_type: "",
-    attendance: -1,
-    notes: "",
-    location: "",
-    event_date: "",
-  });
   const [loading, setLoading] = useState(true);
 
   if (!open) return null;
-
-  useEffect(() => {
-    setEventData(data);
-    //console.log("TEST EVENT: " + eventData.name);
-  }, [data]);
 
   const formatDateString = (date: string) => {
     let months = [
@@ -72,6 +56,23 @@ const Event = ({ open, onClose, data }: EventProps) => {
     let day = splitstring2[0];
     return month + " " + day + " " + year;
   };
+
+  useEffect(() => {
+    setEventData(data);
+    setLoading(false);
+  }, [data]);
+
+  const [eventData, setEventData] = useState({
+    name: "",
+    id: "",
+    venue: "",
+    all_ages: false,
+    billing_type: "",
+    attendance: -1,
+    notes: "",
+    location: "",
+    event_date: "",
+  });
 
   return (
     <div className="modal">
