@@ -72,8 +72,8 @@ const TourPage = ({ params: { tourid } }: Params) => {
         setTourData(data);
         setLoading(false);
         //console.log("data: " + JSON.stringify(data));
-        console.log("tour data: " + tourData);
-        console.log("EVENTS " + tourData.events[0].name);
+        ///console.log("tour data: " + tourData);
+        //console.log("EVENTS " + tourData.events[0].name);
       });
   };
 

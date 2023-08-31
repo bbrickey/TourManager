@@ -71,10 +71,13 @@ const AddEvent = ({ open, onClose, tourid }: AddEventProps) => {
 
   useEffect(() => {
     getTour();
+  }, []);
+
+  useEffect(() => {
     if (tourid) {
       setTour(tourid);
     }
-  }, []);
+  }, [tourid]);
 
   const onSubmit = async (e: FormEvent) => {
     data.name = name;
@@ -123,7 +126,7 @@ const AddEvent = ({ open, onClose, tourid }: AddEventProps) => {
   const renderTourOption = () => {
     if (tourid) {
       return (
-        <select value={tourid} onChange={(e) => setTour(e.target.value)}>
+        <select defaultValue={tourid}>
           <option value={tourid}>{getTourName()}</option>
         </select>
       );

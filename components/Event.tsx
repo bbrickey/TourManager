@@ -47,9 +47,8 @@ const Event = ({ open, onClose, data }: EventProps) => {
 
   useEffect(() => {
     setEventData(data);
-    setLoading(false);
     //console.log("TEST EVENT: " + eventData.name);
-  }, []);
+  }, [data]);
 
   const formatDateString = (date: string) => {
     let months = [

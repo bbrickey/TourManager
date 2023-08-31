@@ -48,33 +48,25 @@ const TourLedger = ({ tourid }: TourLedgerProps) => {
         <div className="ledger-item">
           <h3>Account Type</h3>
           {ledgerData.map((entry) => (
-            <div>
-              <p key={entry.account_type}>{entry.account_type}</p>
-            </div>
+            <p key={entry.id}>{entry.account_type}</p>
           ))}
         </div>
         <div className="ledger-item">
           <h3>Category</h3>
           {ledgerData.map((entry) => (
-            <div>
-              <p key={entry.category}>{entry.category}</p>
-            </div>
+            <p key={entry.id}>{entry.category}</p>
           ))}
         </div>
         <div className="ledger-item">
           <h3>Subcategory</h3>
           {ledgerData.map((entry) => (
-            <div>
-              <p key={entry.subcategory}>{entry.subcategory}</p>
-            </div>
+            <p key={entry.id}>{entry.subcategory}</p>
           ))}
         </div>
         <div className="ledger-item">
           <h3>Value</h3>
           {ledgerData.map((entry) => (
-            <div>
-              <p key={entry.value}>{entry.value}</p>
-            </div>
+            <p key={entry.id}>{entry.value}</p>
           ))}
         </div>
       </div>

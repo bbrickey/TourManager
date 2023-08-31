@@ -104,11 +104,15 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
     setEndDate(e.target.value);
   };
 
+  const isStartDateAfterEndDate = new Date(startDate) > new Date(endDate);
+
+  /*
   useEffect(() => {
-    const isStartDateAfterEndDate = new Date(startDate) > new Date(endDate);
+    //const isStartDateAfterEndDate = new Date(startDate) > new Date(endDate);
     setErrorMsg(isStartDateAfterEndDate);
     //console.log(isStartDateAfterEndDate);
   }, [startDate, endDate]);
+  */
 
   return (
     <div className="modal">
@@ -159,8 +163,8 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
             <label>End Date</label>
             <input type="date" onChange={handleEndDateChange}></input>
 
-            {errorMsg && (
-              <p className="errorMessage">Start Date is After End Date</p>
+            {isStartDateAfterEndDate && (
+              <p className="error">Start Date is After End Date</p>
             )}
           </div>
           <div>
@@ -176,7 +180,7 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
           ) : (
             <>
               {errorMsg && (
-                <p className="errorMessage">
+                <p className="error">
                   Please fix the errors before submitting.
                 </p>
               )}
