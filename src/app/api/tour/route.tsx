@@ -66,3 +66,27 @@ export async function GET(req: Request, res: Response) {
 
   return NextResponse.json(404);
 }
+
+export async function POST(req: Request) {
+  const data: Tour = await req.json();
+  const startdateObj = new Date(data.data.start_date);
+  const startDate = startdateObj.toISOString();
+  const enddateObj = new Date(data.data.end_date);
+  const endDate = startdateObj.toISOString();
+
+  console.log(data);
+
+  const result = await prisma.tours.create({
+    data: {
+      name: data.data.name,
+      start_date: startDate,
+      end_date: endDate,
+      billing_type: data.data.billing_type,
+      other_bands: data.data.bands,
+      notes: data.data.notes,
+      region: data.data.region,
+    },
+  });
+
+  return NextResponse.json(data);
+}

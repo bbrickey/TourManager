@@ -28,16 +28,20 @@ const Ledger = () => {
 
   const getLedger = async () => {
     //console.log("Trying");
-    await fetch("/api/ledger", {
-      method: "GET",
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setLedgerData(data);
-        //console.log("event data: " + JSON.stringify(data));
+    try {
+      const response = await fetch("/api/ledger", {
+        method: "GET",
       });
+      if (!response.ok) {
+        // Handle non-successful HTTP responses (e.g., 404, 500, etc.)
+        throw new Error(`HTTP status ${response.status}`);
+      }
+      const data = await response.json();
+      setLedgerData(data);
+      console.log("event data: " + JSON.stringify(data));
+    } catch (error) {
+      console.error("Error fetching ledger data:", error);
+    }
   };
 
   useEffect(() => {
@@ -49,25 +53,25 @@ const Ledger = () => {
       <div className="ledger-item">
         <h2>Account Type</h2>
         {ledgerData.map((entry) => (
-          <p key={entry.account_type}>{entry.account_type}</p>
+          <p key={entry.id}>{entry.account_type}</p>
         ))}
       </div>
       <div className="ledger-item">
         <h2>Category</h2>
         {ledgerData.map((entry) => (
-          <p key={entry.category}>{entry.category}</p>
+          <p key={entry.id}>{entry.category}</p>
         ))}
       </div>
       <div className="ledger-item">
         <h2>Subcategory</h2>
         {ledgerData.map((entry) => (
-          <p key={entry.subcategory}>{entry.subcategory}</p>
+          <p key={entry.id}>{entry.subcategory}</p>
         ))}
       </div>
       <div className="ledger-item">
         <h2>Value</h2>
         {ledgerData.map((entry) => (
-          <p key={entry.value}>{entry.value}</p>
+          <p key={entry.id}>{entry.value}</p>
         ))}
       </div>
     </div>

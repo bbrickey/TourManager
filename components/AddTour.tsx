@@ -84,9 +84,14 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
         body: JSON.stringify({ data }),
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP status ${response.status}`);
+      }
+
       const result = await response.json();
+      console.log("server response: " + result); // Handle the response from the server
+
       setFormSubmitted(true);
-      //console.log(result); // Handle the response from the server
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -176,7 +181,7 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
             <textarea onChange={(e) => setNotes(e.target.value)}></textarea>
           </div>
           {formSubmitted ? (
-            <p>Form submitted successfully!</p>
+            <p>Tour Created!</p>
           ) : (
             <>
               {errorMsg && (

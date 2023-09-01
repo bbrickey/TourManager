@@ -267,7 +267,6 @@ const ExpenseForm = () => {
   useEffect(() => {
     if (isSubmitSuccessful) {
       setSubmitModalOpen(true);
-      //console.log("success");
       reset();
     }
   }),
