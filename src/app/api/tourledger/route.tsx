@@ -17,7 +17,10 @@ type FormData = {
 };
 */
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(
+  req: NextApiRequest & { url: string },
+  res: NextApiResponse
+) {
   console.log("Trying");
   const { searchParams } = new URL(req.url!);
   const tourid = searchParams.get("tourid")?.toString();

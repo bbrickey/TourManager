@@ -35,7 +35,10 @@ export async function GET(request: Request) {
 }
 */
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(
+  req: NextApiRequest & { url: string },
+  res: NextApiResponse
+) {
   //console.log("WERE TRYING");
 
   //METHOD 1 - string manipulaiton
