@@ -1,5 +1,5 @@
 import { prisma } from "../prismadb";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 
 /*
 type FormData = {
@@ -15,6 +15,24 @@ type FormData = {
 };
 */
 
+export async function GET(req: Request, res: Response) {
+  if (req.url) {
+    console.log("Trying");
+    const { searchParams } = new URL(req.url!);
+    const tourid = searchParams.get("tourid")?.toString();
+    console.log("tour id " + tourid);
+
+    const result = await prisma.accountLedger.findMany({
+      where: {
+        tour_id: tourid,
+      },
+    });
+    return NextResponse.json(result);
+  }
+
+  return NextResponse.json(404);
+}
+/*
 export async function GET(req: NextApiRequest, res: NextApiResponse) {
   if (req.url) {
     const { searchParams } = new URL(req.url!);
@@ -30,6 +48,7 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
 
   return res.json(404);
 }
+*/
 
 /*
 export async function POST(req: Request) {

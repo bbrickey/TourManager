@@ -1,4 +1,3 @@
-import { z } from "zod";
 import { prisma } from "../prismadb";
 import { NextRequest, NextResponse } from "next/server";
 import { Prisma, Tours } from "@prisma/client";

@@ -69,9 +69,9 @@ export async function POST(req: Request) {
       });
     }
 
-    return new Response("OK", { status: 200 });
+    return NextResponse.json(200);
   } catch (error) {
     console.error("Error:", error);
-    return new Response("Bad Request", { status: 400 });
+    return NextResponse.json(400);
   }
 }

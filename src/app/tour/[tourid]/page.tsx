@@ -96,7 +96,7 @@ const TourPage = ({ params: { tourid } }: Params) => {
   };
 
   const formatDateString = (date: string) => {
-    if (!loading) {
+    if (date) {
       let months = [
         "January",
         "February",

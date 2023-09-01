@@ -1,5 +1,5 @@
 import { prisma } from "../prismadb";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest, NextResponse } from "next/server";
 
 type Tour = {
   data: {
@@ -32,7 +32,7 @@ export async function GET(request: Request) {
 }
 */
 
-export async function GET(req: NextApiRequest, res: NextApiResponse) {
+export async function GET(req: Request, res: Response) {
   //console.log("WERE TRYING");
 
   //METHOD 1 - string manipulaiton
@@ -43,6 +43,7 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
 
   //METHOD 2 - search Params
   if (req.url) {
+    //console.log("Request URL:", req.url);
     const { searchParams } = new URL(req.url!);
     const tourid = searchParams.get("tourid")?.toString();
 
@@ -58,8 +59,10 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
     });
     //console.log("response" + result);
 
-    return res.json(result);
+    //return res.json(result);
+    //return NextResponse.json(res);
+    return NextResponse.json(result);
   }
 
-  return res.json(404);
+  return NextResponse.json(404);
 }
