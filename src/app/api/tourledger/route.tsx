@@ -17,21 +17,20 @@ type FormData = {
 };
 */
 
-export async function GET(
-  req: NextApiRequest & { url: string },
-  res: NextApiResponse
-) {
-  console.log("Trying");
-  const { searchParams } = new URL(req.url!);
-  const tourid = searchParams.get("tourid")?.toString();
+export async function GET(req: NextApiRequest, res: NextApiResponse) {
+  if (req.url) {
+    const { searchParams } = new URL(req.url!);
+    const tourid = searchParams.get("tourid")?.toString();
 
-  const result = await prisma.accountLedger.findMany({
-    where: {
-      tour_id: tourid,
-    },
-  });
+    const result = await prisma.accountLedger.findMany({
+      where: {
+        tour_id: tourid,
+      },
+    });
+    return res.json(result);
+  }
 
-  return NextResponse.json(result);
+  return res.json(404);
 }
 
 /*

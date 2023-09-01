@@ -35,10 +35,7 @@ export async function GET(request: Request) {
 }
 */
 
-export async function GET(
-  req: NextApiRequest & { url: string },
-  res: NextApiResponse
-) {
+export async function GET(req: NextApiRequest, res: NextApiResponse) {
   //console.log("WERE TRYING");
 
   //METHOD 1 - string manipulaiton
@@ -48,20 +45,24 @@ export async function GET(
   //const tourid = str?.split("=")[1]; //req.query not working??
 
   //METHOD 2 - search Params
-  const { searchParams } = new URL(req.url!);
-  const tourid = searchParams.get("tourid")?.toString();
+  if (req.url) {
+    const { searchParams } = new URL(req.url!);
+    const tourid = searchParams.get("tourid")?.toString();
 
-  //console.log("TourID " + tourid);
+    //console.log("TourID " + tourid);
 
-  const result = await prisma.tours.findUnique({
-    where: {
-      id: tourid,
-    },
-    include: {
-      events: true,
-    },
-  });
-  //console.log("response" + result);
+    const result = await prisma.tours.findUnique({
+      where: {
+        id: tourid,
+      },
+      include: {
+        events: true,
+      },
+    });
+    //console.log("response" + result);
 
-  return NextResponse.json(result);
+    return res.json(result);
+  }
+
+  return res.json(404);
 }
