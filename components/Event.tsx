@@ -32,8 +32,6 @@ interface EventProps {
 const Event = ({ open, onClose, data }: EventProps) => {
   const [loading, setLoading] = useState(true);
 
-  if (!open) return null;
-
   const formatDateString = (date: string) => {
     let months = [
       "January",
@@ -73,6 +71,8 @@ const Event = ({ open, onClose, data }: EventProps) => {
     location: "",
     event_date: "",
   });
+
+  if (!open) return null;
 
   return (
     <div className="modal">
