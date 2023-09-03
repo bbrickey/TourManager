@@ -5,6 +5,7 @@ import Link from "next/link";
 import Event from "../../../../components/Event";
 import AddEvent from "../../../../components/AddEvent";
 import TourLedger from "../../../../components/TourLedger";
+import NavBar from "../../../../components/NavBar";
 
 type Params = {
   params: {
@@ -124,6 +125,7 @@ const TourPage = ({ params: { tourid } }: Params) => {
 
   return (
     <div>
+      <NavBar />
       <div className="tour-page">
         {loading ? (
           "loading..."
@@ -132,30 +134,31 @@ const TourPage = ({ params: { tourid } }: Params) => {
             <h1>{tourData.name}</h1>
             <h2>Region: {tourData.region}</h2>
             <h2>Billing: {tourData.billing_type}</h2>
-            <h3>
+            <h2>
               Dates:
               {formatDateString(tourData.start_date)} to{" "}
               {formatDateString(tourData.end_date)}
-            </h3>
-            <h3>Bands: {tourData.other_bands}</h3>
-            <h3>Notes: {tourData.notes}</h3>
+            </h2>
+            <h2>Bands: {tourData.other_bands}</h2>
+            <h2>Notes: {tourData.notes}</h2>
           </div>
         )}
+        <div className="event-buttons">
+          <button onClick={() => setAddEventOpen(true)}>Add New Event</button>
+          {addEventOpen && (
+            <div>
+              <AddEvent
+                open={addEventOpen}
+                tourid={tourid}
+                onClose={() => setAddEventOpen(!addEventOpen)}
+              />
+            </div>
+          )}
+        </div>
       </div>
-      <div>
-        <button onClick={() => setAddEventOpen(true)}>Add New Event</button>
-        {addEventOpen && (
-          <div>
-            <AddEvent
-              open={addEventOpen}
-              tourid={tourid}
-              onClose={() => setAddEventOpen(!addEventOpen)}
-            />
-          </div>
-        )}
-      </div>
-      <div>
-        <h2>Shows</h2>
+
+      <div className="show-list">
+        <h1>Shows</h1>
         {/*<Event {...tourData.events[0]} /> */}
         <ul>
           {tourData.events.map((opt) => (
@@ -178,9 +181,9 @@ const TourPage = ({ params: { tourid } }: Params) => {
           </div>
         )}
       </div>
-      <div>
-        <TourLedger tourid={tourid} />
-      </div>
+
+      <TourLedger tourid={tourid} />
+
       <div>
         <Link href="/tours-and-events">Back to Tours & Events </Link>
       </div>

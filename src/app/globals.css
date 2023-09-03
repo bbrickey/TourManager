@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Linear+B&display=swap');
 /*
 @tailwind base;
 @tailwind components;
@@ -18,43 +21,142 @@
 }
 */
 
+
+
+* {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-  background-color: black;
+  background-color: #0a0a0f;
   color: white;
 }
 
 h1 {
   text-align: center;
+  
 }
 
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 10%;
+}
 button {
-  background-color: #4A55A2;
+  font-family: 'Roboto', sans-serif;
+  background-color: #5c5c8a;
   color: white;
   padding: 1rem;
   margin: 1rem;
   border-radius: .5rem;
 }
 
-/*EXPENSE FORM PAGE */
+@media (max-width: 500px) {
+  h1 {
+    font-size: 1.3rem;
+  }
+}
+ 
+/* NAV BAR */
 
+.navbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-image: linear-gradient(to right, #3d3d5c, #8585ad);
+  align-items: center;
+  gap: 2rem; 
+  padding: 0 1rem;
+}
+.navbar ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+  max-width: 90%;
+}
+.navbar h2 {
+  font-size: 2rem;
+  padding: 1rem;
+  font-weight: normal;
+  max-width: 90%;
+}
+
+.navbar .link {
+color: inherit;
+text-decoration: none;
+}
+
+@media (max-width: 500px) {
+  .navbar{
+    padding: 0;
+    gap: 0;
+    font-size: 1rem;
+    justify-content: center;
+  }
+.navbar h2 {
+  font-size: 1.5rem;
+  text-align: center;
+}
+.navbar li {
+  padding: 1rem;
+}
+}
+/*EXPENSE FORM PAGE */
+.event-buttons {
+  display: flex;
+  justify-content: center;
+}
 .expense-form {
   position: relative;
-  background: black;
-  color: white;
+  background: #f0f0f5;
+  color: black;
   border: 1px solid white;
   padding: 2rem;
-  margin: 1rem;
+  margin: 1rem 5rem;
   border-radius: .5rem;
-  font-family: Arial;
 }
 
 .form-control {
-  border: 1px solid white;
-  padding: 2rem;
-  margin: 1rem;
+  border: 1px solid black;
+  padding: 1rem;
+  margin: 1rem 0;
   border-radius: .5rem;
+  display: flex;
+  flex-wrap: wrap;
 }
 
+.expense-form h1 {
+  padding-bottom: 1rem;
+}
+.expense-form label {
+  font-family: 'Noto Sans Linear B', sans-serif;
+  padding: 0 .5rem;
+}
+
+.expense-form select, input {
+  background-color: #d1d1e0;
+  border: none;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.expense-form textarea {
+  background-color: #d1d1e0;
+  border: none;
+  border-radius: 10px;
+  height: 100px;
+  width: 100%;
+  resize: none;
+  box-sizing: border-box;
+  margin: 1rem;
+  padding: 1rem;
+}
 
 .error {
   color: red;
@@ -62,20 +164,40 @@ button {
 }
 
 .submit-modal {
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background: white;
   color: black;
   border: 1px solid black;
   padding: 1rem;
   margin: 1rem;
   border-radius: .5rem;
-  font-family: Arial;
   position: absolute;
   left: 50%;
   bottom: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
   
+}
+
+@media (max-width: 500px) {
+  .expense-form {
+    margin: 0 1rem;
+    flex-direction: column;
+  }
+
+  .expense-form label {
+    padding: 1rem 0 1rem 0;
+  }
+
+  .form-control {
+    flex-direction: column;
+  }
+  .form-control label, select, p, textarea, input {
+    padding: 0;
+    max-width: 90%;
+  }
 }
 
 /*TOUR FORM */
@@ -89,6 +211,7 @@ button {
   margin: 1rem;
   border-radius: .5rem;
   font-family: Arial;
+
 }
 
 
@@ -104,13 +227,39 @@ button {
 /* TOUR PAGE */
 .tour-page {
   position: relative;
-  background: white;
+  background: #f0f0f5;
   color: black;
   border: 1px solid black;
   padding: 2rem;
-  margin: 1rem;
+  margin: 1rem 2rem;
   border-radius: .5rem;
-  font-family: Arial;
+}
+
+.tour-page h2 {
+ font-size: 1rem;
+ padding: 0.5rem;
+}
+
+.tour-list, ol {
+  margin: 2rem;
+  font-size: 1.5rem;
+  list-style: none;
+}
+
+.show-list, ul {
+  margin: 2rem;
+  list-style: none;
+}
+
+@media (max-width: 500px) {
+  .tour-ledger {
+    max-width: 90%;
+  }
+  .ledger-item {
+    font-size: 13px;
+  }
+
+  
 }
 
 /* EVENT PAGE */
@@ -130,12 +279,14 @@ button {
 .ledger-list {
   display: flex;
   justify-content: center;
-
-
 }
 
 .ledger-item {
   margin: 1rem;
+}
+
+@media (max-width: 500px) {
+  
 }
 
 

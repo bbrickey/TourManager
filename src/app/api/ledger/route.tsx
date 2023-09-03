@@ -40,6 +40,7 @@ export async function GET(request: Request) {
       event_id: true,
       notes: true,
       tour_id: true,
+      created_at: true,
     },
   });
 

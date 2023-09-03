@@ -274,7 +274,7 @@ const ExpenseForm = () => {
 
   const onSubmit = async (data: FormData) => {
     //console.log("Form Submitted", data);
-
+    /*
     try {
       //console.log("TEST");
       const response = await fetch("/api/ledger", {
@@ -291,185 +291,189 @@ const ExpenseForm = () => {
     } catch (error) {
       console.error("Error submitting form:", error);
     }
+    */
   };
 
   return (
-    <div className="expense-form">
-      <h1>Add Income & Expenses</h1>
-
-      <div>
-        <button onClick={() => setTourModalOpen(true)}>Add New Tour</button>
-        {tourModalOpen && (
-          <div>
-            <AddTour
-              open={tourModalOpen}
-              onClose={() => setTourModalOpen(!tourModalOpen)}
-            />
-          </div>
-        )}
-      </div>
-      <div>
-        <button onClick={() => setEventModalOpen(true)}>Add New Event</button>
-        {eventModalOpen && (
-          <div>
-            <AddEvent
-              open={eventModalOpen}
-              onClose={() => setEventModalOpen(!eventModalOpen)}
-            />
-          </div>
-        )}
-      </div>
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+    <div>
+      <div className="event-buttons">
         <div>
-          <label>Is this part of a tour?</label>
-          <select value={tour} onChange={handleTourChange}>
-            <option value="none">No</option>
-            {tourData.map((opt) => (
-              <option key={opt.id} value={opt.id}>
-                {opt.name}
-              </option>
-            ))}
-          </select>
+          <button onClick={() => setTourModalOpen(true)}>Add New Tour</button>
+          {tourModalOpen && (
+            <div>
+              <AddTour
+                open={tourModalOpen}
+                onClose={() => setTourModalOpen(!tourModalOpen)}
+              />
+            </div>
+          )}
         </div>
         <div>
-          <label>Is this part of an event?</label>
-          <select value={event} onChange={(e) => setEvent(e.target.value)}>
-            <option value="no">No</option>
-            {/*
+          <button onClick={() => setEventModalOpen(true)}>Add New Event</button>
+          {eventModalOpen && (
+            <div>
+              <AddEvent
+                open={eventModalOpen}
+                onClose={() => setEventModalOpen(!eventModalOpen)}
+              />
+            </div>
+          )}
+        </div>
+      </div>
+      <div className="expense-form">
+        <h1>Update Ledger</h1>
+        <form onSubmit={handleSubmit(onSubmit)} noValidate>
+          <div>
+            <label>Add these updates to a tour?</label>
+            <select value={tour} onChange={handleTourChange}>
+              <option value="none">No</option>
+              {tourData.map((opt) => (
+                <option key={opt.id} value={opt.id}>
+                  {opt.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label>Add these updates to an event?</label>
+            <select value={event} onChange={(e) => setEvent(e.target.value)}>
+              <option value="no">No</option>
+              {/*
             <option value="no">No</option>
             <option value="event 1">Event 1</option>
             <option value="event 2">Event 2</option>
         */}
 
-            {selectedTourEvents.map((opt) => (
-              <option key={opt.id} value={opt.id}>
-                {opt.name}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div>
-          <div>
-            {fields.map((field, index) => {
-              {
-                register(`userInput.${index}.tour`, { value: tour });
-              }
-              {
-                register(`userInput.${index}.event`, { value: event });
-              }
-              return (
-                <div className="form-control" key={field.id}>
-                  <label>Account Type: </label>
-                  <select
-                    defaultValue=""
-                    {...register(`userInput.${index}.accountType` as const, {
-                      required: { value: true, message: "Field is required" },
-                    })}
-                    onChange={(e) => setCategory(e.target.value)}
-                  >
-                    <option value="" hidden disabled></option>
-                    <option value="expense">Expense</option>
-                    <option value="income">Income</option>
-                    <option value="liability">Liability</option>
-                  </select>
-                  <p className="error">
-                    {errors.userInput?.[index]?.accountType?.message}
-                  </p>
-                  <label>Category</label>
-
-                  <select
-                    {...register(`userInput.${index}.category` as const, {
-                      required: { value: true, message: "Field is required" },
-                    })}
-                    onChange={(e) => setSubcategory(e.target.value)}
-                    defaultValue=""
-                  >
-                    <option value="" hidden disabled></option>
-                    {categoryVals.map((opt) => (
-                      <option key={opt.value} value={opt.value}>
-                        {opt.text}
-                      </option>
-                    ))}
-                  </select>
-                  <p className="error">
-                    {errors.userInput?.[index]?.category?.message}
-                  </p>
-
-                  <label>Subcategory</label>
-                  <select
-                    {...register(`userInput.${index}.subcategory` as const, {
-                      required: { value: true, message: "Field is required" },
-                    })}
-                    defaultValue=""
-                  >
-                    <option value="" hidden disabled></option>
-                    {subcatVals.map((opt) => (
-                      <option key={opt.value} value={opt.value}>
-                        {opt.text}
-                      </option>
-                    ))}
-                  </select>
-                  <p className="error">
-                    {errors.userInput?.[index]?.subcategory?.message}
-                  </p>
-                  <label>Value</label>
-                  <input
-                    type="number"
-                    {...register(`userInput.${index}.value` as const, {
-                      valueAsNumber: true,
-                      min: { value: 0, message: "Value must be positive" },
-                    })}
-                  ></input>
-                  <p className="error">
-                    {errors.userInput?.[index]?.value?.message}
-                  </p>
-                  <label>Notes</label>
-                  <textarea
-                    {...register(`userInput.${index}.notes` as const)}
-                  ></textarea>
-
-                  {index >= 0 && (
-                    <button type="button" onClick={() => remove(index)}>
-                      Delete Expense
-                    </button>
-                  )}
-                </div>
-              );
-            })}
+              {selectedTourEvents.map((opt) => (
+                <option key={opt.id} value={opt.id}>
+                  {opt.name}
+                </option>
+              ))}
+            </select>
           </div>
-        </div>
 
-        <div>
-          <button
-            type="button"
-            onClick={() =>
-              append({
-                accountType: "",
-                category: "",
-                subcategory: "",
-                value: 0,
-                tour: "",
-                event: "",
-                notes: "",
-              })
-            }
-          >
-            Add Another Income/Expense
-          </button>
-        </div>
+          <div>
+            <div>
+              {fields.map((field, index) => {
+                {
+                  register(`userInput.${index}.tour`, { value: tour });
+                }
+                {
+                  register(`userInput.${index}.event`, { value: event });
+                }
+                return (
+                  <div className="form-control" key={field.id}>
+                    <label>Account Type: </label>
+                    <select
+                      defaultValue=""
+                      {...register(`userInput.${index}.accountType` as const, {
+                        required: { value: true, message: "Field is required" },
+                      })}
+                      onChange={(e) => setCategory(e.target.value)}
+                    >
+                      <option value="" hidden disabled></option>
+                      <option value="expense">Expense</option>
+                      <option value="income">Income</option>
+                      <option value="liability">Liability</option>
+                    </select>
+                    <p className="error">
+                      {errors.userInput?.[index]?.accountType?.message}
+                    </p>
+                    <label>Category: </label>
 
-        <button type="submit">Submit</button>
+                    <select
+                      {...register(`userInput.${index}.category` as const, {
+                        required: { value: true, message: "Field is required" },
+                      })}
+                      onChange={(e) => setSubcategory(e.target.value)}
+                      defaultValue=""
+                    >
+                      <option value="" hidden disabled></option>
+                      {categoryVals.map((opt) => (
+                        <option key={opt.value} value={opt.value}>
+                          {opt.text}
+                        </option>
+                      ))}
+                    </select>
+                    <p className="error">
+                      {errors.userInput?.[index]?.category?.message}
+                    </p>
 
-        {submitModalOpen && (
-          <div className="submit-modal">
-            <h1>Submission Successful!</h1>
-            <button onClick={() => setSubmitModalOpen(!submitModalOpen)}>
-              Close
+                    <label>Subcategory: </label>
+                    <select
+                      {...register(`userInput.${index}.subcategory` as const, {
+                        required: { value: true, message: "Field is required" },
+                      })}
+                      defaultValue=""
+                    >
+                      <option value="" hidden disabled></option>
+                      {subcatVals.map((opt) => (
+                        <option key={opt.value} value={opt.value}>
+                          {opt.text}
+                        </option>
+                      ))}
+                    </select>
+                    <p className="error">
+                      {errors.userInput?.[index]?.subcategory?.message}
+                    </p>
+                    <label>Value: </label>
+                    <input
+                      type="number"
+                      {...register(`userInput.${index}.value` as const, {
+                        valueAsNumber: true,
+                        min: { value: 0, message: "Value must be positive" },
+                      })}
+                    ></input>
+                    <p className="error">
+                      {errors.userInput?.[index]?.value?.message}
+                    </p>
+                    <label>Notes: </label>
+                    <textarea
+                      {...register(`userInput.${index}.notes` as const)}
+                    ></textarea>
+
+                    {index >= 0 && (
+                      <button type="button" onClick={() => remove(index)}>
+                        Delete Expense
+                      </button>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <div>
+            <button
+              type="button"
+              onClick={() =>
+                append({
+                  accountType: "",
+                  category: "",
+                  subcategory: "",
+                  value: 0,
+                  tour: "",
+                  event: "",
+                  notes: "",
+                })
+              }
+            >
+              Add Another Income/Expense
             </button>
           </div>
-        )}
-      </form>
+
+          <button type="submit">Submit</button>
+
+          {submitModalOpen && (
+            <div className="submit-modal">
+              <h1>Submission Successful!</h1>
+              <button onClick={() => setSubmitModalOpen(!submitModalOpen)}>
+                Close
+              </button>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 };

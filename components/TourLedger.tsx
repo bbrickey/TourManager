@@ -42,7 +42,7 @@ const TourLedger = ({ tourid }: TourLedgerProps) => {
     //console.log(ledgerData);
   }, []);
   return (
-    <div>
+    <div className="tour-ledger">
       <h1>Ledger</h1>
       <div className="ledger-list">
         <div className="ledger-item">

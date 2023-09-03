@@ -4,6 +4,7 @@ import Link from "next/link";
 import AddTour from "../../../components/AddTour";
 import { prisma } from "@/app/api/prismadb";
 import Tours from "../tours-and-events/page";
+import NavBar from "../../../components/NavBar";
 /*
 type tourList = {
     id: string;
@@ -66,7 +67,7 @@ export default async function Home() {
 
   return (
     <div>
-      <h1>Ledger</h1>
+      <NavBar />
       {/*<ExpenseForm tourdata={...tourData} />*/}
       <ExpenseForm />
       <Link href="/">Back to Dashboard </Link>

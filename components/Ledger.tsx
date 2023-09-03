@@ -10,6 +10,7 @@ type Ledger = {
   event_id: string;
   notes: string;
   tour_id: string;
+  created_at: string;
 };
 
 const Ledger = () => {
@@ -23,6 +24,7 @@ const Ledger = () => {
       event_id: "",
       notes: "",
       tour_id: "",
+      created_at: "",
     },
   ]);
 
@@ -38,7 +40,7 @@ const Ledger = () => {
       }
       const data = await response.json();
       setLedgerData(data);
-      console.log("event data: " + JSON.stringify(data));
+      //console.log("event data: " + JSON.stringify(data));
     } catch (error) {
       console.error("Error fetching ledger data:", error);
     }
@@ -72,6 +74,12 @@ const Ledger = () => {
         <h2>Value</h2>
         {ledgerData.map((entry) => (
           <p key={entry.id}>{entry.value}</p>
+        ))}
+      </div>
+      <div className="ledger-item">
+        <h2>Date Created</h2>
+        {ledgerData.map((entry) => (
+          <p key={entry.id}>{entry.created_at}</p>
         ))}
       </div>
     </div>

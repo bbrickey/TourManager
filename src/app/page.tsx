@@ -1,11 +1,12 @@
 import Image from "next/image";
 import { DashboardMenu } from "../../components/DashboardMenu";
+import NavBar from "../../components/NavBar";
 
 export default function Home() {
   return (
-    <h1>
-      Dead Bars Finance App
+    <div className="main-body">
+      <NavBar />
       <DashboardMenu />
-    </h1>
+    </div>
   );
 }

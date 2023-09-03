@@ -7,7 +7,7 @@ const TourDashboard = () => {
   const [tourModalOpen, setTourModalOpen] = useState(false);
   const [eventModalOpen, setEventModalOpen] = useState(false);
   return (
-    <div>
+    <div className="event-buttons">
       <div>
         <button onClick={() => setTourModalOpen(true)}>Add New Tour</button>
         {tourModalOpen && (

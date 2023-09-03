@@ -27,17 +27,19 @@ const TourList = () => {
   return (
     <div>
       <h1>Tours</h1>
-      {loading ? (
-        "Loading..."
-      ) : (
-        <ol>
-          {tourData.map((tour) => (
-            <li key={tour.id}>
-              <Link href={`/tour/${tour.id}`}>{tour.name}</Link>
-            </li>
-          ))}
-        </ol>
-      )}
+      <div className="tour-list">
+        {loading ? (
+          "Loading..."
+        ) : (
+          <ol>
+            {tourData.map((tour) => (
+              <li key={tour.id}>
+                <Link href={`/tour/${tour.id}`}>{tour.name}</Link>
+              </li>
+            ))}
+          </ol>
+        )}
+      </div>
     </div>
   );
 };
