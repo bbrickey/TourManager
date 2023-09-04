@@ -153,6 +153,11 @@ const ExpenseForm = () => {
       })
       .then((data) => {
         setEventData(data);
+        //pre-populate form with non-tour events
+        const filteredEvents = eventData.filter((event) => {
+          return event.tour_id === null;
+        });
+        setSelectedTourEvents(filteredEvents);
         //console.log("event data: " + JSON.stringify(data));
       });
   };
@@ -167,25 +172,23 @@ const ExpenseForm = () => {
   */
   const handleTourChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
-    setTour(selectedValue);
-    //console.log(e.target.value); //displays 6515e118-4a6d-434b-9def-fa4c4b2d7ab0
-    //console.log("eventData " + JSON.stringify(eventData[1].tour_id)); // displays an object with tour = "6515e118-4a6d-434b-9def-fa4c4b2d7ab0"
-    const filteredEvents = eventData.filter((event) => {
-      return event.tour_id === selectedValue.toString();
-    });
-    //console.log(filteredEvents); //displays an empty array
-    setSelectedTourEvents(filteredEvents);
+    //if no tour selected, populate events with no tours
+    if (selectedValue == "none") {
+      const filteredEvents = eventData.filter((event) => {
+        return event.tour_id === null;
+      });
+      setSelectedTourEvents(filteredEvents);
+    } else {
+      //populate events from seleceted tour
+      setTour(selectedValue);
+      //console.log(e.target.value); //displays 6515e118-4a6d-434b-9def-fa4c4b2d7ab0
+      //console.log("eventData " + JSON.stringify(eventData[1].tour_id)); // displays an object with tour = "6515e118-4a6d-434b-9def-fa4c4b2d7ab0"
+      const filteredEvents = eventData.filter((event) => {
+        return event.tour_id === selectedValue.toString();
+      });
+      setSelectedTourEvents(filteredEvents);
+    }
   };
-  /*
-  useEffect(() => {
-    console.log("WE ARE DOING IT");
-    const filteredEvents = eventData.filter((event) => {
-      return event.tour === tour;
-    });
-    console.log(filteredEvents);
-    setSelectedTourEvents(filteredEvents);
-  }, [setTour]);
-  */
 
   useEffect(() => {
     getTours();
@@ -274,7 +277,7 @@ const ExpenseForm = () => {
 
   const onSubmit = async (data: FormData) => {
     //console.log("Form Submitted", data);
-    /*
+
     try {
       //console.log("TEST");
       const response = await fetch("/api/ledger", {
@@ -291,14 +294,18 @@ const ExpenseForm = () => {
     } catch (error) {
       console.error("Error submitting form:", error);
     }
-    */
   };
 
   return (
     <div>
       <div className="event-buttons">
         <div>
-          <button onClick={() => setTourModalOpen(true)}>Add New Tour</button>
+          <button
+            className="font-roboto bg-custom text-white py-4 px-6 my-4 mx-4 rounded-md"
+            onClick={() => setTourModalOpen(true)}
+          >
+            Add New Tour
+          </button>
           {tourModalOpen && (
             <div>
               <AddTour
@@ -309,7 +316,12 @@ const ExpenseForm = () => {
           )}
         </div>
         <div>
-          <button onClick={() => setEventModalOpen(true)}>Add New Event</button>
+          <button
+            className="font-roboto bg-custom text-white py-4 px-6 my-4 mx-4 rounded-md"
+            onClick={() => setEventModalOpen(true)}
+          >
+            Add New Event
+          </button>
           {eventModalOpen && (
             <div>
               <AddEvent
@@ -433,7 +445,11 @@ const ExpenseForm = () => {
                     ></textarea>
 
                     {index >= 0 && (
-                      <button type="button" onClick={() => remove(index)}>
+                      <button
+                        className="font-roboto bg-custom text-white py-4 px-4 my-4 mx-4 rounded-md"
+                        type="button"
+                        onClick={() => remove(index)}
+                      >
                         Delete Expense
                       </button>
                     )}
@@ -446,6 +462,7 @@ const ExpenseForm = () => {
           <div>
             <button
               type="button"
+              className="font-roboto bg-custom text-white py-4 px-4 my-4 mx-4 rounded-md"
               onClick={() =>
                 append({
                   accountType: "",
@@ -462,12 +479,20 @@ const ExpenseForm = () => {
             </button>
           </div>
 
-          <button type="submit">Submit</button>
+          <button
+            className="font-roboto bg-custom text-white py-4 px-4 my-4 mx-4 rounded-md"
+            type="submit"
+          >
+            Submit
+          </button>
 
           {submitModalOpen && (
             <div className="submit-modal">
               <h1>Submission Successful!</h1>
-              <button onClick={() => setSubmitModalOpen(!submitModalOpen)}>
+              <button
+                className="font-roboto bg-custom text-white py-4 px-6 my-4 mx-4 rounded-md"
+                onClick={() => setSubmitModalOpen(!submitModalOpen)}
+              >
                 Close
               </button>
             </div>

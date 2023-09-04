@@ -35,9 +35,8 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
   const [bands, setBands] = useState("");
   const [region, setRegion] = useState("");
   const [notes, setNotes] = useState("");
-  const [isOpen, setIsOpen] = useState("false");
-  const [errorMsg, setErrorMsg] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [submitModalOpen, setSubmitModalOpen] = useState(false);
 
   const typeCategories = [
     { value: "Headline", text: "Headline" },
@@ -59,7 +58,7 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
   ];
 
   const onSubmit = async (e: FormEvent) => {
-    if (errorMsg) data.bands = bands;
+    data.bands = bands;
     data.name = name;
     data.billing_type = billingType;
     data.start_date = startDate;
@@ -70,10 +69,10 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
     //console.log("Form Submitted", data);
     //console.log(JSON.stringify(data));
 
-    if (errorMsg) {
-      // If errorMsg is true, display a message to the user
+    if (isStartDateAfterEndDate) {
       return;
     }
+
     try {
       //console.log("TEST");
       const response = await fetch("/api/tour", {
@@ -92,6 +91,7 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
       console.log("server response: " + result); // Handle the response from the server
 
       setFormSubmitted(true);
+      setSubmitModalOpen(true);
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -111,14 +111,6 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
 
   const isStartDateAfterEndDate = new Date(startDate) > new Date(endDate);
 
-  /*
-  useEffect(() => {
-    //const isStartDateAfterEndDate = new Date(startDate) > new Date(endDate);
-    setErrorMsg(isStartDateAfterEndDate);
-    //console.log(isStartDateAfterEndDate);
-  }, [startDate, endDate]);
-  */
-
   return (
     <div className="modal">
       <div className="tour-form">
@@ -135,6 +127,7 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
           <div>
             <label>Type:</label>
             <select
+              className="bg-custom_form rounded-md"
               defaultValue=""
               required
               onChange={(e) => setBillingType(e.target.value)}
@@ -150,6 +143,7 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
           <div>
             <label>Region:</label>
             <select
+              className="bg-custom_form rounded-md"
               defaultValue=""
               required
               onChange={(e) => setRegion(e.target.value)}
@@ -174,25 +168,51 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
           </div>
           <div>
             <label>Other Bands:</label>
-            <textarea onChange={(e) => setBands(e.target.value)}></textarea>
+            <textarea
+              className="bg-custom_form rounded-md"
+              onChange={(e) => setBands(e.target.value)}
+            ></textarea>
           </div>
           <div>
             <label>Notes:</label>
-            <textarea onChange={(e) => setNotes(e.target.value)}></textarea>
+            <textarea
+              className="bg-custom_form rounded-md"
+              onChange={(e) => setNotes(e.target.value)}
+            ></textarea>
           </div>
-          {formSubmitted ? (
-            <p>Tour Created!</p>
-          ) : (
-            <>
-              {errorMsg && (
-                <p className="error">
-                  Please fix the errors before submitting.
-                </p>
-              )}
-              <button type="submit">Submit</button>
-            </>
+
+          <>
+            {isStartDateAfterEndDate && (
+              <p className="error">Please fix the errors before submitting.</p>
+            )}
+            <button
+              className="font-roboto bg-custom text-white py-2 px-2 my-2 mx-2 rounded-md"
+              type="submit"
+            >
+              Submit
+            </button>
+          </>
+
+          <button
+            className="font-roboto bg-custom text-white py-2 px-2 my-2 mx-2 rounded-md"
+            onClick={() => onClose()}
+          >
+            Close
+          </button>
+          {submitModalOpen && (
+            <div className="submit-modal">
+              <h1>Submission Successful!</h1>
+              <button
+                className="font-roboto bg-custom text-white py-4 px-6 my-4 mx-4 rounded-md"
+                onClick={() => {
+                  onClose();
+                  setSubmitModalOpen(false);
+                }}
+              >
+                Close
+              </button>
+            </div>
           )}
-          <button onClick={() => onClose()}>Close</button>
         </form>
       </div>
     </div>

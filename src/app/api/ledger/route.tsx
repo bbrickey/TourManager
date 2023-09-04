@@ -42,6 +42,9 @@ export async function GET(request: Request) {
       tour_id: true,
       created_at: true,
     },
+    orderBy: {
+      created_at: "desc",
+    },
   });
 
   return NextResponse.json(res);

@@ -47,6 +47,7 @@ const AddEvent = ({ open, onClose, tourid }: AddEventProps) => {
   const [notes, setNotes] = useState("");
   const [tourData, setTourData] = useState([{ id: "", name: "" }]);
   const [isOpen, setIsOpen] = useState("false");
+  const [submitModalOpen, setSubmitModalOpen] = useState(false);
 
   const typeCategories = [
     { value: "Headline", text: "Headline" },
@@ -105,6 +106,9 @@ const AddEvent = ({ open, onClose, tourid }: AddEventProps) => {
       });
 
       const result = await response.json();
+
+      setSubmitModalOpen(true);
+      //reset form
     } catch (error) {
       console.error("Error submitting form:", error);
     }
@@ -126,13 +130,16 @@ const AddEvent = ({ open, onClose, tourid }: AddEventProps) => {
   const renderTourOption = () => {
     if (tourid) {
       return (
-        <select defaultValue={tourid}>
+        <select className="bg-custom_form rounded-md" defaultValue={tourid}>
           <option value={tourid}>{getTourName()}</option>
         </select>
       );
     } else {
       return (
-        <select onChange={(e) => setTour(e.target.value)}>
+        <select
+          className="bg-custom_form rounded-md"
+          onChange={(e) => setTour(e.target.value)}
+        >
           <option value="">None</option>
           {tourData.map((opt) => (
             <option key={opt.id} value={opt.id}>
@@ -183,8 +190,9 @@ const AddEvent = ({ open, onClose, tourid }: AddEventProps) => {
             ></input>
           </div>
           <div>
-            <label>Type:</label>
+            <label>Billing Type:</label>
             <select
+              className="bg-custom_form rounded-md"
               defaultValue=""
               onChange={(e) => setBillingType(e.target.value)}
             >
@@ -206,7 +214,10 @@ const AddEvent = ({ open, onClose, tourid }: AddEventProps) => {
           </div>
           <div>
             <label>Other Bands:</label>
-            <textarea onChange={(e) => setBands(e.target.value)}></textarea>
+            <textarea
+              className="bg-custom_form rounded-md"
+              onChange={(e) => setBands(e.target.value)}
+            ></textarea>
           </div>
           <div>
             <label>Attendance:</label>
@@ -218,10 +229,37 @@ const AddEvent = ({ open, onClose, tourid }: AddEventProps) => {
           </div>
           <div>
             <label>Notes:</label>
-            <textarea onChange={(e) => setNotes(e.target.value)}></textarea>
+            <textarea
+              className="bg-custom_form rounded-md"
+              onChange={(e) => setNotes(e.target.value)}
+            ></textarea>
           </div>
-          <button type="submit">Submit</button>
-          <button onClick={() => onClose()}>Close</button>
+          <button
+            className="font-roboto bg-custom text-white py-2 px-2 my-2 mx-2 rounded-md"
+            type="submit"
+          >
+            Submit
+          </button>
+          <button
+            className="font-roboto bg-custom text-white py-2 px-2 my-2 mx-2 rounded-md"
+            onClick={() => onClose()}
+          >
+            Close
+          </button>
+          {submitModalOpen && (
+            <div className="submit-modal">
+              <h1>Submission Successful!</h1>
+              <button
+                className="font-roboto bg-custom text-white py-2 px-2 my-2 mx-2 rounded-md"
+                onClick={() => {
+                  onClose();
+                  setSubmitModalOpen(false);
+                }}
+              >
+                Close
+              </button>
+            </div>
+          )}
         </form>
       </div>
     </div>

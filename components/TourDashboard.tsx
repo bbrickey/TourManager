@@ -9,7 +9,12 @@ const TourDashboard = () => {
   return (
     <div className="event-buttons">
       <div>
-        <button onClick={() => setTourModalOpen(true)}>Add New Tour</button>
+        <button
+          className="font-roboto bg-custom text-white py-4 px-6 my-4 mx-4 rounded-md"
+          onClick={() => setTourModalOpen(true)}
+        >
+          Add New Tour
+        </button>
         {tourModalOpen && (
           <div>
             <AddTour
@@ -20,7 +25,12 @@ const TourDashboard = () => {
         )}
       </div>
       <div>
-        <button onClick={() => setEventModalOpen(true)}>Add New Event</button>
+        <button
+          className="font-roboto bg-custom text-white py-4 px-6 my-4 mx-4 rounded-md"
+          onClick={() => setEventModalOpen(true)}
+        >
+          Add New Event
+        </button>
         {eventModalOpen && (
           <div>
             <AddEvent
