@@ -144,7 +144,12 @@ const TourPage = ({ params: { tourid } }: Params) => {
           </div>
         )}
         <div className="event-buttons">
-          <button onClick={() => setAddEventOpen(true)}>Add New Event</button>
+          <button
+            className="font-roboto bg-custom text-white py-2 px-2 my-2 mx-2 rounded-md"
+            onClick={() => setAddEventOpen(true)}
+          >
+            Add New Event
+          </button>
           {addEventOpen && (
             <div>
               <AddEvent

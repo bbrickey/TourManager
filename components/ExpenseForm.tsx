@@ -153,11 +153,6 @@ const ExpenseForm = () => {
       })
       .then((data) => {
         setEventData(data);
-        //pre-populate form with non-tour events
-        const filteredEvents = eventData.filter((event) => {
-          return event.tour_id === null;
-        });
-        setSelectedTourEvents(filteredEvents);
         //console.log("event data: " + JSON.stringify(data));
       });
   };
@@ -173,16 +168,15 @@ const ExpenseForm = () => {
   const handleTourChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedValue = e.target.value;
     //if no tour selected, populate events with no tours
-    if (selectedValue == "none") {
+    if (selectedValue == "") {
+      setTour(selectedValue);
       const filteredEvents = eventData.filter((event) => {
         return event.tour_id === null;
       });
       setSelectedTourEvents(filteredEvents);
     } else {
-      //populate events from seleceted tour
+      //populate events from selected tour
       setTour(selectedValue);
-      //console.log(e.target.value); //displays 6515e118-4a6d-434b-9def-fa4c4b2d7ab0
-      //console.log("eventData " + JSON.stringify(eventData[1].tour_id)); // displays an object with tour = "6515e118-4a6d-434b-9def-fa4c4b2d7ab0"
       const filteredEvents = eventData.filter((event) => {
         return event.tour_id === selectedValue.toString();
       });
@@ -194,6 +188,15 @@ const ExpenseForm = () => {
     getTours();
     getEvents();
   }, []);
+
+  useEffect(() => {
+    //pre-populate form with non-tour events
+    //console.log("eventData " + eventData);
+    const filteredEvents = eventData.filter((event) => {
+      return event.tour_id === null;
+    });
+    setSelectedTourEvents(filteredEvents);
+  }, [eventData]);
 
   useEffect(() => {
     if (category == "expense") {
@@ -338,7 +341,7 @@ const ExpenseForm = () => {
           <div>
             <label>Add these updates to a tour?</label>
             <select value={tour} onChange={handleTourChange}>
-              <option value="none">No</option>
+              <option value="">No</option>
               {tourData.map((opt) => (
                 <option key={opt.id} value={opt.id}>
                   {opt.name}
@@ -349,7 +352,7 @@ const ExpenseForm = () => {
           <div>
             <label>Add these updates to an event?</label>
             <select value={event} onChange={(e) => setEvent(e.target.value)}>
-              <option value="no">No</option>
+              <option value="">No</option>
               {/*
             <option value="no">No</option>
             <option value="event 1">Event 1</option>

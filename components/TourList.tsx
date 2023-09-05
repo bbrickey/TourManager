@@ -37,6 +37,9 @@ const TourList = () => {
                 <Link href={`/tour/${tour.id}`}>{tour.name}</Link>
               </li>
             ))}
+            <li>
+              <Link href={`/tour/notour`}>Non-Tour Events</Link>
+            </li>
           </ol>
         )}
       </div>

@@ -91,7 +91,12 @@ const Event = ({ open, onClose, data }: EventProps) => {
             <h3>Notes: {eventData.notes}</h3>
           </div>
         )}
-        <button onClick={() => onClose()}>Close</button>
+        <button
+          className="font-roboto bg-custom text-white py-4 px-6 my-4 mx-4 rounded-md"
+          onClick={() => onClose()}
+        >
+          Close
+        </button>
       </div>
     </div>
   );
