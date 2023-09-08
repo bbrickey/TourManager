@@ -13,8 +13,8 @@ export default async function Home() {
       <div className="demo-desc">
         <div className="demo-paragraphs">
           <p>
-            To view a demo of the Tour Manager app, please click "Continue as
-            Guest" below.
+            To view a demo of the Tour Manager app, please click Continue as
+            Guest below.
           </p>
           <p>
             You will have full read-only access to the app, but permissions to
