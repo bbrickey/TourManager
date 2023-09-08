@@ -70,7 +70,6 @@ export default async function Home() {
       <NavBar />
       {/*<ExpenseForm tourdata={...tourData} />*/}
       <ExpenseForm />
-      <Link href="/">Back to Dashboard </Link>
     </div>
   );
 }

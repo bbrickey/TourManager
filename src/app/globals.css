@@ -85,8 +85,6 @@
 
 
 
-
-
 /* MY CSS */
 
 
@@ -122,9 +120,78 @@ body.button {
   border-radius: .5rem;
 }
 
+.demo-desc {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.demo-paragraphs p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1rem;
+}
+
+.demo-link {
+  margin: 1rem;
+  padding: 0.5rem;
+  border: 1px solid white;
+  border-radius: 3%;
+  text-decoration: bold;
+  background-color: #6129f0;
+  text-align: center;
+}
+
+
 @media (max-width: 500px) {
   h1 {
     font-size: 1.3rem;
+  }
+}
+
+/* LOG IN */
+
+.main-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  padding: 3rem 1rem;
+  border: 1px solid grey;
+  border-radius: 1%;
+}
+
+.login-container h1 {
+  margin-bottom: 2rem;
+  color: #8055ed;
+  font-weight: 900;
+  font-size: 1.5rem;
+}
+.login-form {
+  width: 80%;
+}
+
+.login-item {
+  display: flex;
+  flex-direction: column;
+  margin: 1.5rem;
+}
+
+@media (max-width: 500px) {
+  .login-container {
+    width: 80%;
+  }
+
+  .demo-desc {
+    text-align: center;
   }
 }
  
@@ -171,7 +238,9 @@ text-decoration: none;
   text-align: center;
 }
 .navbar li {
-  padding: 1rem;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+  text-align: center;
 }
 }
 /*EXPENSE FORM PAGE */
@@ -366,6 +435,13 @@ text-decoration: none;
 
 @media (max-width: 500px) {
   
+}
+
+/*PROFILE */
+.profile-data {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
 }
 
 

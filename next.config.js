@@ -4,4 +4,8 @@ module.exports = {
     experimental: {
       serverActions: true,
     },
+   webpack: (config) => {
+      config.externals = [...config.externals, 'bcrypt'];
+      return config;
+      },
   }

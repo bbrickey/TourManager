@@ -1,14 +1,17 @@
 import React from "react";
-import Ledger from "../../../components/Ledger";
 import Link from "next/link";
 import NavBar from "../../../components/NavBar";
+import UpdatePassword from "../../../components/UpdatePassword";
+import Profile from "../../../components/Profile";
 
 const reports = () => {
   return (
     <div>
       <NavBar />
-      <h1>Reports</h1>
-      <Ledger />
+      <div className="main-body">
+        <Profile />
+        <UpdatePassword />
+      </div>
     </div>
   );
 };

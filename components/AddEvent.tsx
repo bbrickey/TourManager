@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, FormEvent, useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 interface AddEventProps {
   open: boolean;
@@ -48,6 +49,7 @@ const AddEvent = ({ open, onClose, tourid }: AddEventProps) => {
   const [tourData, setTourData] = useState([{ id: "", name: "" }]);
   const [isOpen, setIsOpen] = useState("false");
   const [submitModalOpen, setSubmitModalOpen] = useState(false);
+  const session = useSession();
 
   const typeCategories = [
     { value: "Headline", text: "Headline" },
@@ -96,21 +98,25 @@ const AddEvent = ({ open, onClose, tourid }: AddEventProps) => {
     // console.log("Form Submitted", data);
     //console.log(JSON.stringify(data));
 
-    try {
-      const response = await fetch("/api/event", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data }),
-      });
+    if (session?.status === "authenticated") {
+      try {
+        const response = await fetch("/api/event", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ data }),
+        });
 
-      const result = await response.json();
+        const result = await response.json();
 
-      setSubmitModalOpen(true);
-      //reset form
-    } catch (error) {
-      console.error("Error submitting form:", error);
+        setSubmitModalOpen(true);
+        //reset form
+      } catch (error) {
+        console.error("Error submitting form:", error);
+      }
+    } else {
+      alert("You must be logged in to submit");
     }
   };
 

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, FormEvent, useEffect } from "react";
+import { useSession } from "next-auth/react";
 
 interface AddTourProps {
   open: boolean;
@@ -37,6 +38,7 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
   const [notes, setNotes] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [submitModalOpen, setSubmitModalOpen] = useState(false);
+  const session = useSession();
 
   const typeCategories = [
     { value: "Headline", text: "Headline" },
@@ -73,27 +75,31 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
       return;
     }
 
-    try {
-      //console.log("TEST");
-      const response = await fetch("/api/tour", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data }),
-      });
+    if (session?.status === "authenticated") {
+      try {
+        //console.log("TEST");
+        const response = await fetch("/api/tour", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ data }),
+        });
 
-      if (!response.ok) {
-        throw new Error(`HTTP status ${response.status}`);
+        if (!response.ok) {
+          throw new Error(`HTTP status ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log("server response: " + result); // Handle the response from the server
+
+        setFormSubmitted(true);
+        setSubmitModalOpen(true);
+      } catch (error) {
+        console.error("Error submitting form:", error);
       }
-
-      const result = await response.json();
-      console.log("server response: " + result); // Handle the response from the server
-
-      setFormSubmitted(true);
-      setSubmitModalOpen(true);
-    } catch (error) {
-      console.error("Error submitting form:", error);
+    } else {
+      alert("You must be logged in to submit");
     }
   };
 

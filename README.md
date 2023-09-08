@@ -1,13 +1,14 @@
-Version 1.0 for live debugging purposes only
+Tour Manager App
 
-To do:
+Designed and built for Seattle band, Dead Bars by Benjamin Brickey 2023
 
-- authentication
-- styling
-- calendar view
-- generate reports based on client feedback
+Features:
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+- Tour & Event management - tracks date, venue, featured bands, attendance, & related income/expenses
+- Financial Ledger: tracks income/expenses/liabilities for tour, merchandise, recording, personell, marketing & loans
+- Reports: Enables band to view finances by date range, tour or specific event
+
+Built using NextJS framework - Typescript, Tailwind, Prisma (mysql), NextAuth authentication
 
 ## Getting Started
 

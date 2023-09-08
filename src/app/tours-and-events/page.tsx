@@ -16,7 +16,6 @@ export default function Tours() {
       {/*<Calendar />*/}
       <TourDashboard />
       <TourList />
-      <Link href="/">Back to Dashboard </Link>
     </div>
   );
 }

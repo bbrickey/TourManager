@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useForm, Controller, useFieldArray } from "react-hook-form";
 import AddTour from "./AddTour";
 import AddEvent from "./AddEvent";
+import { useSession } from "next-auth/react";
 
 type FormData = {
   userInput: {
@@ -43,6 +44,7 @@ const ExpenseForm = () => {
   const [tourModalOpen, setTourModalOpen] = useState(false);
   const [eventModalOpen, setEventModalOpen] = useState(false);
   const [submitModalOpen, setSubmitModalOpen] = useState(false);
+  const session = useSession();
 
   const expCategories = [
     { value: "tour", text: "Tour Expense" },
@@ -281,21 +283,25 @@ const ExpenseForm = () => {
   const onSubmit = async (data: FormData) => {
     //console.log("Form Submitted", data);
 
-    try {
-      //console.log("TEST");
-      const response = await fetch("/api/ledger", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        //body: JSON.stringify({ data }),
-        body: JSON.stringify(data),
-      });
+    if (session?.status === "authenticated") {
+      try {
+        //console.log("TEST");
+        const response = await fetch("/api/ledger", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          //body: JSON.stringify({ data }),
+          body: JSON.stringify(data),
+        });
 
-      const result = await response.json();
-      //console.log(result); // Handle the response from the server
-    } catch (error) {
-      console.error("Error submitting form:", error);
+        const result = await response.json();
+        //console.log(result); // Handle the response from the server
+      } catch (error) {
+        console.error("Error submitting form:", error);
+      }
+    } else {
+      alert("You must be logged in to submit");
     }
   };
 

@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import UpdatePassword from "./UpdatePassword";
 
 export const DashboardMenu = () => {
   return (
@@ -16,6 +17,8 @@ export const DashboardMenu = () => {
       <div className="w = 100 text-center mt-2">
         <Link href="/reports">View Reports </Link>
       </div>
+
+      <UpdatePassword />
       {/* 
         <div className="w = 100 text-center mt-2">
           <Link href="/update-profile">Update Username & Password </Link>
