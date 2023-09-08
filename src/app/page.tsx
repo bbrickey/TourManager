@@ -15,7 +15,7 @@ export default async function Home() {
           <p>
             To view a demo of the Tour Manager app, please click "Continue as
             Guest" below.
-          </p>{" "}
+          </p>
           <p>
             You will have full read-only access to the app, but permissions to
             submit forms will be removed.
