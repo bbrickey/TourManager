@@ -2,8 +2,6 @@
 import Link from "next/link";
 import React from "react";
 import SignOut from "./SignOut";
-import { getServerSession } from "next-auth";
-import { Options } from "@/app/api/auth/[...nextauth]/route";
 import { useSession } from "next-auth/react";
 
 const NavBar = () => {

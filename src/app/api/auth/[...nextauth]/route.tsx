@@ -7,7 +7,7 @@ import { prisma } from "../../prismadb";
 import type { NextAuthOptions } from "next-auth";
 import bcrypt from "bcrypt";
 
-export const Options: NextAuthOptions = {
+const Options: NextAuthOptions = {
   //const handler = NextAuth({
   // Configure one or more authentication providers
   adapter: PrismaAdapter(prisma),
