@@ -366,9 +366,20 @@ text-decoration: none;
   background: #f0f0f5;
   color: black;
   border: 1px solid black;
-  padding: 2rem;
-  margin: 1rem 2rem;
+  padding: 1rem 2rem;
+  margin: 2rem;
   border-radius: .5rem;
+}
+
+.tour-data {
+  display: flex;
+  justify-content: left;
+  gap: 5rem;
+  padding: 2rem 0;
+}
+
+.tour-page h1 {
+  font-size: 2rem;
 }
 
 .tour-page h2 {
@@ -382,9 +393,11 @@ text-decoration: none;
   list-style: none;
 }
 
-.show-list, ul {
-  margin: 2rem;
+.show-page, ul {
   list-style: none;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
 }
 
 @media (max-width: 500px) {
@@ -441,7 +454,15 @@ text-decoration: none;
 .profile-data {
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin: 2rem;
+  width: 800px;
+}
+
+@media (max-width: 500px) {
+  .profile-data {
+    width: 300px;
+  }
 }
 
 

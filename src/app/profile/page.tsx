@@ -10,7 +10,7 @@ const reports = () => {
       <NavBar />
       <div className="main-body">
         <Profile />
-        <UpdatePassword />
+        {/*<UpdatePassword />*/}
       </div>
     </div>
   );

@@ -131,7 +131,7 @@ const Ledger = () => {
     return date.split("T")[0];
   };
 
-  console.log("Ledger Data:", ledgerData);
+  //console.log("Ledger Data:", ledgerData);
 
   return (
     <div className="ledger-container">

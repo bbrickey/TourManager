@@ -13,6 +13,18 @@ type Params = {
   };
 };
 
+type Event = {
+  id: string;
+  name: string;
+  venue: string;
+  all_ages: boolean;
+  billing_type: string;
+  attendance: number;
+  notes: string;
+  location: string;
+  event_date: string;
+};
+
 const TourPage = ({ params: { tourid } }: Params) => {
   const [tourData, setTourData] = useState({
     id: "",
@@ -97,6 +109,7 @@ const TourPage = ({ params: { tourid } }: Params) => {
   };
 
   const formatDateString = (date: string) => {
+    console.log(date);
     if (date) {
       let months = [
         "January",
@@ -123,6 +136,19 @@ const TourPage = ({ params: { tourid } }: Params) => {
     }
   };
 
+  const displayEvent = (opt: Event) => {
+    const dateString = formatDateString(opt.event_date);
+    return (
+      <li
+        className="clickable"
+        onClick={(key) => openEvent(opt.id)}
+        key={opt.id}
+      >
+        {opt.name} {dateString}
+      </li>
+    );
+  };
+
   return (
     <div>
       <NavBar />
@@ -132,15 +158,42 @@ const TourPage = ({ params: { tourid } }: Params) => {
         ) : (
           <div>
             <h1>{tourData.name}</h1>
-            <h2>Region: {tourData.region}</h2>
-            <h2>Billing: {tourData.billing_type}</h2>
-            <h2>
-              Dates:
-              {formatDateString(tourData.start_date)} to{" "}
-              {formatDateString(tourData.end_date)}
-            </h2>
-            <h2>Bands: {tourData.other_bands}</h2>
-            <h2>Notes: {tourData.notes}</h2>
+            <div className="tour-data">
+              <div>
+                <h2>Region: {tourData.region}</h2>
+                <h2>Billing: {tourData.billing_type}</h2>
+                <h2>
+                  Dates: {formatDateString(tourData.start_date)} to{" "}
+                  {formatDateString(tourData.end_date)}
+                </h2>
+              </div>
+              <div>
+                <h2>
+                  Bands: {tourData.other_bands ? tourData.other_bands : "n/a"}
+                </h2>
+                <h2>Notes: {tourData.notes ? tourData.notes : "n/a"}</h2>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div className="tour-page">
+        <div></div>
+        <h1>Shows</h1>
+        {/*<Event {...tourData.events[0]} /> */}
+        {loading ? (
+          "No Events"
+        ) : (
+          <ul>{tourData.events.map((opt) => displayEvent(opt))}</ul>
+        )}
+        {eventModalOpen && (
+          <div>
+            <Event
+              data={eventData}
+              open={eventModalOpen}
+              onClose={() => setEventModalOpen(!eventModalOpen)}
+            />
           </div>
         )}
         <div className="event-buttons">
@@ -162,38 +215,10 @@ const TourPage = ({ params: { tourid } }: Params) => {
         </div>
       </div>
 
-      <div className="show-list">
-        <h1>Shows</h1>
-        {/*<Event {...tourData.events[0]} /> */}
-        <ul>
-          {tourData.events.map((opt) => (
-            <li
-              className="clickable"
-              onClick={(key) => openEvent(opt.id)}
-              key={opt.id}
-            >
-              {opt.name}
-            </li>
-          ))}
-        </ul>
-        {eventModalOpen && (
-          <div>
-            <Event
-              data={eventData}
-              open={eventModalOpen}
-              onClose={() => setEventModalOpen(!eventModalOpen)}
-            />
-          </div>
-        )}
-      </div>
-
       <TourLedger tourid={tourid} />
 
       <div>
         <Link href="/tours-and-events">Back to Tours & Events </Link>
-      </div>
-      <div>
-        <Link href="/">Back to Dashboard </Link>
       </div>
     </div>
   );
