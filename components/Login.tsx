@@ -18,7 +18,7 @@ const Login = () => {
 
   const loginUser = async (e: FormEvent) => {
     e.preventDefault();
-    //console.log("SUBMITTING");
+    //console.log("Attempting Login...");
     signIn("credentials", { ...data, callbackUrl: "/add-income" });
   };
 

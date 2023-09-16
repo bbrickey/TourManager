@@ -43,6 +43,7 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
   const typeCategories = [
     { value: "Headline", text: "Headline" },
     { value: "Support", text: "Support" },
+    { value: "Co-Headline", text: "Co-Headline" },
     { value: "Festival", text: "Festival" },
     { value: "Other", text: "Other" },
   ];
@@ -50,9 +51,11 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
   const regionCategories = [
     { value: "West Coast", text: "West Coast" },
     { value: "East Coast", text: "East Coast" },
+
     { value: "South", text: "South" },
     { value: "Midwest", text: "Midwest" },
-    { value: "PNW", text: "PNW" },
+    { value: "Northwest", text: "Northwest" },
+    { value: "Northeast", text: "Northeast" },
     { value: "Canada", text: "Canada" },
     { value: "Europe", text: "Europe" },
     { value: "Asia", text: "Asia" },

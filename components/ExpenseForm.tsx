@@ -106,12 +106,8 @@ const ExpenseForm = () => {
   ];
 
   const incSubCatMerch = [
-    { value: "clothing_online", text: "Clothing (Online)" },
-    { value: "clothing_tour", text: "Clothing (Tour)" },
-    { value: "physical_media_online", text: "Physical Media (online)" },
-    { value: "physical_media_tour", text: "Physical Media (tour)" },
-    { value: "royalities", text: "Royalites" },
-    { value: "digital_items", text: "Digital Items" },
+    { value: "online_merch", text: "Online Merch" },
+    { value: "tour_merch", text: "Tour Merch" },
     { value: "other", text: "Other" },
   ];
   const incSubCatTour = [
@@ -125,6 +121,7 @@ const ExpenseForm = () => {
     { value: "licensing", text: "Licensing" },
     { value: "subscription", text: "Subscription" },
     { value: "advance", text: "Advance" },
+    { value: "royalities", text: "Royalites" },
     { value: "other", text: "Other" },
   ];
   const LiabilitySubCat = [
