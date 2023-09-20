@@ -30,7 +30,7 @@ const INITIAL_DATA: FormData = {
   billing_type: "",
   all_ages: false,
   bands: "",
-  attendance: -1,
+  attendance: 0,
   notes: "",
 };
 

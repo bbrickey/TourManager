@@ -47,16 +47,16 @@ const ExpenseForm = () => {
   const session = useSession();
 
   const expCategories = [
-    { value: "tour", text: "Tour Expense" },
-    { value: "general", text: "General Band Expense" },
-    { value: "recording", text: "Recording Expense" },
-    { value: "merch", text: "Merch Expense" },
-    { value: "marketing", text: "Marketing Expense" },
+    { value: "tour_expense", text: "Tour Expense" },
+    { value: "general_expense", text: "General Band Expense" },
+    { value: "recording_expense", text: "Recording Expense" },
+    { value: "merch_expense", text: "Merch Expense" },
+    { value: "marketing_expense", text: "Marketing Expense" },
   ];
   const incCategories = [
-    { value: "merch", text: "Merch Income" },
-    { value: "tour", text: "Tour Income" },
-    { value: "other", text: "Other Income" },
+    { value: "merch_income", text: "Merch Income" },
+    { value: "tour_income", text: "Tour Income" },
+    { value: "other_income", text: "Other Income" },
   ];
   const liabilityCategories = [{ value: "liability", text: "Liability" }];
 
@@ -213,31 +213,31 @@ const ExpenseForm = () => {
   }, [category]);
 
   useEffect(() => {
-    if (category == "expense" && subcategory == "tour") {
+    if (category == "expense" && subcategory == "tour_expense") {
       setSubcatVals(expSubCatTour);
     }
-    if (category == "expense" && subcategory == "general") {
+    if (category == "expense" && subcategory == "general_expense") {
       setSubcatVals(expSubCatGeneral);
     }
-    if (category == "expense" && subcategory == "recording") {
+    if (category == "expense" && subcategory == "recording_expense") {
       setSubcatVals(expSubCatRecording);
     }
-    if (category == "expense" && subcategory == "merch") {
+    if (category == "expense" && subcategory == "merch_expense") {
       setSubcatVals(expSubCatMerch);
     }
-    if (category == "expense" && subcategory == "personnel") {
+    if (category == "expense" && subcategory == "personnel_expense") {
       setSubcatVals(expSubCatPersonnel);
     }
-    if (category == "expense" && subcategory == "marketing") {
+    if (category == "expense" && subcategory == "marketing_expense") {
       setSubcatVals(expSubCatMarketing);
     }
-    if (category == "income" && subcategory == "merch") {
+    if (category == "income" && subcategory == "merch_income") {
       setSubcatVals(incSubCatMerch);
     }
-    if (category == "income" && subcategory == "tour") {
+    if (category == "income" && subcategory == "tour_income") {
       setSubcatVals(incSubCatTour);
     }
-    if (category == "income" && subcategory == "other") {
+    if (category == "income" && subcategory == "other_income") {
       setSubcatVals(incSubCatOther);
     }
     if (category == "liability") {

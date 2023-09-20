@@ -6,6 +6,7 @@ import Event from "../../../../components/Event";
 import AddEvent from "../../../../components/AddEvent";
 import TourLedger from "../../../../components/TourLedger";
 import NavBar from "../../../../components/NavBar";
+import TourReport from "../../../../components/TourReport";
 
 type Params = {
   params: {
@@ -109,7 +110,7 @@ const TourPage = ({ params: { tourid } }: Params) => {
   };
 
   const formatDateString = (date: string) => {
-    console.log(date);
+    //console.log(date);
     if (date) {
       let months = [
         "January",
@@ -137,14 +138,15 @@ const TourPage = ({ params: { tourid } }: Params) => {
   };
 
   const displayEvent = (opt: Event) => {
-    const dateString = formatDateString(opt.event_date);
+    //if date is needed use:
+    //const dateString = formatDateString(opt.event_date);
     return (
       <li
         className="clickable"
         onClick={(key) => openEvent(opt.id)}
         key={opt.id}
       >
-        {opt.name} {dateString}
+        {opt.name}
       </li>
     );
   };
@@ -178,14 +180,17 @@ const TourPage = ({ params: { tourid } }: Params) => {
         )}
       </div>
 
+      <TourReport tourid={tourid} />
+
       <div className="tour-page">
-        <div></div>
         <h1>Shows</h1>
         {/*<Event {...tourData.events[0]} /> */}
         {loading ? (
           "No Events"
         ) : (
-          <ul>{tourData.events.map((opt) => displayEvent(opt))}</ul>
+          <ul className="tour-page__show-list">
+            {tourData.events.map((opt) => displayEvent(opt))}
+          </ul>
         )}
         {eventModalOpen && (
           <div>
@@ -196,6 +201,7 @@ const TourPage = ({ params: { tourid } }: Params) => {
             />
           </div>
         )}
+
         <div className="event-buttons">
           <button
             className="font-roboto bg-custom text-white py-2 px-2 my-2 mx-2 rounded-md"
@@ -215,7 +221,7 @@ const TourPage = ({ params: { tourid } }: Params) => {
         </div>
       </div>
 
-      <TourLedger tourid={tourid} />
+      {/*<TourLedger tourid={tourid} /> */}
 
       <div>
         <Link href="/tours-and-events">Back to Tours & Events </Link>
