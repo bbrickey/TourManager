@@ -54,7 +54,12 @@ export async function GET(req: Request, res: Response) {
         id: tourid,
       },
       include: {
-        events: true,
+        //events: true,
+        events: {
+          orderBy: {
+            event_date: "asc",
+          },
+        },
       },
     });
     //console.log("response" + result);
