@@ -125,7 +125,7 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
       <div className="tour-form">
         <h1>Add New Tour</h1>
         <form onSubmit={onSubmit}>
-          <div>
+          <div className="event-field">
             <label>Tour Name:</label>
             <input
               type="text"
@@ -133,7 +133,7 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
               onChange={(e) => setName(e.target.value)}
             ></input>
           </div>
-          <div>
+          <div className="event-field">
             <label>Type:</label>
             <select
               className="bg-custom_form rounded-md"
@@ -149,7 +149,7 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
               ))}
             </select>
           </div>
-          <div>
+          <div className="event-field">
             <label>Region:</label>
             <select
               className="bg-custom_form rounded-md"
@@ -165,24 +165,25 @@ const AddTour = ({ open, onClose }: AddTourProps) => {
               ))}
             </select>
           </div>
-          <div>
+          <div className="event-field">
             <label>Start Date</label>
             <input type="date" onChange={handleStartDateChange}></input>
+          </div>
+          <div className="event-field">
             <label>End Date</label>
             <input type="date" onChange={handleEndDateChange}></input>
-
-            {isStartDateAfterEndDate && (
-              <p className="error">Start Date is After End Date</p>
-            )}
           </div>
-          <div>
+          {isStartDateAfterEndDate && (
+            <p className="error">Start Date is After End Date</p>
+          )}
+          <div className="event-field">
             <label>Other Bands:</label>
             <textarea
               className="bg-custom_form rounded-md"
               onChange={(e) => setBands(e.target.value)}
             ></textarea>
           </div>
-          <div>
+          <div className="event-field">
             <label>Notes:</label>
             <textarea
               className="bg-custom_form rounded-md"

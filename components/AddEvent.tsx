@@ -2,6 +2,7 @@
 
 import React, { useState, FormEvent, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import CitySearch from "./CitySearch";
 
 interface AddEventProps {
   open: boolean;
@@ -82,6 +83,16 @@ const AddEvent = ({ open, onClose, tourid }: AddEventProps) => {
     }
   }, [tourid]);
 
+  const dateFormat = (date: string) => {
+    //2023-09-20
+    const str = date.split("-");
+    return `${str[1]}.${str[2]}.${str[0]}`;
+  };
+
+  const handleLocationSelect = (selectedLocation: string) => {
+    setLocation(selectedLocation); // Update the location state in the parent component
+  };
+
   const onSubmit = async (e: FormEvent) => {
     data.name = name;
     data.tour = tour;
@@ -97,6 +108,12 @@ const AddEvent = ({ open, onClose, tourid }: AddEventProps) => {
     e.preventDefault();
     // console.log("Form Submitted", data);
     //console.log(JSON.stringify(data));
+
+    if (data.name === "") {
+      const dateString = dateFormat(data.date);
+      data.name = `${dateString} - ${data.city_state} - ${data.venue}`;
+      console.log(data.name);
+    }
 
     if (session?.status === "authenticated") {
       try {
@@ -162,40 +179,50 @@ const AddEvent = ({ open, onClose, tourid }: AddEventProps) => {
       <div className="tour-form">
         <h1>Add New Event</h1>
         <form onSubmit={onSubmit}>
-          <div>
+          <div className="event-field">
             <label>Event Name:</label>
             <input
               type="text"
               onChange={(e) => setName(e.target.value)}
             ></input>
           </div>
+          <p>
+            Event Name will default to date / location / venue if not provided
+          </p>
 
-          <div>
+          <div className="event-field">
             <label>Tour:</label>
             {renderTourOption()}
           </div>
-          <div>
-            <label>Start Date</label>
+          <div className="event-field">
+            <label>Date</label>
             <input
               type="date"
               onChange={(e) => setDate(e.target.value)}
             ></input>
           </div>
-          <div>
+          <div className="event-field">
             <label>Location:</label>
+            {/* 
             <input
               type="text"
               onChange={(e) => setLocation(e.target.value)}
             ></input>
+            */}
+            <CitySearch
+              location={location}
+              onLocationSelect={handleLocationSelect}
+            />
           </div>
-          <div>
+
+          <div className="event-field">
             <label>Venue:</label>
             <input
               type="text"
               onChange={(e) => setVenue(e.target.value)}
             ></input>
           </div>
-          <div>
+          <div className="event-field">
             <label>Billing Type:</label>
             <select
               className="bg-custom_form rounded-md"
@@ -210,7 +237,7 @@ const AddEvent = ({ open, onClose, tourid }: AddEventProps) => {
               ))}
             </select>
           </div>
-          <div>
+          <div className="event-field">
             <label>21+</label>
             <input
               type="checkbox"
@@ -218,14 +245,14 @@ const AddEvent = ({ open, onClose, tourid }: AddEventProps) => {
               onChange={() => checkBox()}
             ></input>
           </div>
-          <div>
+          <div className="event-field">
             <label>Other Bands:</label>
             <textarea
               className="bg-custom_form rounded-md"
               onChange={(e) => setBands(e.target.value)}
             ></textarea>
           </div>
-          <div>
+          <div className="event-field">
             <label>Attendance:</label>
             <input
               type="number"
@@ -233,25 +260,27 @@ const AddEvent = ({ open, onClose, tourid }: AddEventProps) => {
               onChange={(e) => setAttendance(parseInt(e.target.value, 10))}
             ></input>
           </div>
-          <div>
+          <div className="event-field">
             <label>Notes:</label>
             <textarea
               className="bg-custom_form rounded-md"
               onChange={(e) => setNotes(e.target.value)}
             ></textarea>
           </div>
-          <button
-            className="font-roboto bg-custom text-white py-2 px-2 my-2 mx-2 rounded-md"
-            type="submit"
-          >
-            Submit
-          </button>
-          <button
-            className="font-roboto bg-custom text-white py-2 px-2 my-2 mx-2 rounded-md"
-            onClick={() => onClose()}
-          >
-            Close
-          </button>
+          <div className="event-field-button">
+            <button
+              className="font-roboto bg-custom text-white py-2 px-2 my-2 mx-2 rounded-md"
+              type="submit"
+            >
+              Submit
+            </button>
+            <button
+              className="font-roboto bg-custom text-white py-2 px-2 my-2 mx-2 rounded-md"
+              onClick={() => onClose()}
+            >
+              Close
+            </button>
+          </div>
           {submitModalOpen && (
             <div className="submit-modal">
               <h1>Submission Successful!</h1>

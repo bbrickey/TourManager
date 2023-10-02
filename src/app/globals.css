@@ -347,7 +347,82 @@ text-decoration: none;
   margin: 1rem;
   border-radius: .5rem;
   font-family: Arial;
+  display: flex;
+  flex-direction: column; 
+}
 
+.tour-form label {
+  padding: 0.4rem;
+}
+
+.event-field {
+  padding: 0.1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+}
+
+.event-field label {
+  flex: 1;
+  padding: 0.4rem;
+}
+
+.event-field input,
+.event-field select,
+.event-field textarea {
+  flex: 2; 
+  font-size: 0.9rem;
+  padding: 0.3rem 0rem;
+}
+
+.event-field-button {
+  padding: 0.5rem 0rem 0rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center; 
+}
+
+
+.city-search {
+  position: relative;
+  display: flex;
+  flex: 2;
+}
+
+
+.city-search ul {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+  width: 50%;
+  background-color: #e6e3e8;
+  border: 1px solid #ccc;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.city-search li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.city-search-input {
+  flex: 2;
+  font-size: 0.9rem;
+  padding: 0.3rem 0.5rem; 
+}
+
+.tour-form p {
+  font-size: 0.7rem;
+  padding: 0rem 0.5rem 0.5rem;
+  text-align: center;
+}
+
+.tour-form .error {
+  font-size: 0.8rem;
 }
 
 

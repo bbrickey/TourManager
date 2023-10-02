@@ -8,6 +8,9 @@ export async function GET(request: Request) {
     where: {
       tour_id: null,
     },
+    orderBy: {
+      event_date: "asc",
+    },
   });
 
   return NextResponse.json(res);

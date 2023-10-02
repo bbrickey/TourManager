@@ -6,7 +6,7 @@ import AuthContext from "../context/AuthContext";
 //const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Dead Bars Finance App",
+  title: "Dead Bars Tour Manager",
 };
 
 export default function RootLayout({

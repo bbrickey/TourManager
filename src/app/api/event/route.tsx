@@ -25,6 +25,9 @@ export async function GET(request: Request) {
       id: true,
       tour_id: true,
     },
+    orderBy: {
+      event_date: "asc",
+    },
   });
 
   return NextResponse.json(res);
