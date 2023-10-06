@@ -24,6 +24,7 @@ const Login = () => {
   };
 
   const googleSignIn = async () => {
+    console.log("logging in");
     signIn("google", { ...data, callbackUrl: "/add-income" });
   };
 
