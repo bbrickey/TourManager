@@ -7,17 +7,19 @@ import { prisma } from "../../prismadb";
 import type { NextAuthOptions } from "next-auth";
 import bcrypt from "bcrypt";
 
+const googleClientId = process.env.GOOGLE_ID as string;
+const googleSecret = process.env.GOOGLE_SECRET as string;
+
 const Options: NextAuthOptions = {
   //const handler = NextAuth({
   // Configure one or more authentication providers
   adapter: PrismaAdapter(prisma),
   providers: [
-    /*
     GoogleProvider({
-        clientId: process.env.GOOGLE_ID,
-        clientSecret: process.env.GOOGLE_SECRET,
+      clientId: googleClientId,
+      clientSecret: googleSecret,
     }),
-    */
+
     CredentialsProvider({
       name: "credentials",
       credentials: {
@@ -26,8 +28,7 @@ const Options: NextAuthOptions = {
         //username: { label: "Username", type: "text" },
       },
       async authorize(credentials, req) {
-        console.log("TRYING");
-        console.log("creds " + credentials);
+        //console.log("creds " + credentials);
         if (!credentials) {
           throw new Error("no credentials provided");
         }
@@ -42,7 +43,7 @@ const Options: NextAuthOptions = {
             email: credentials.email,
           },
         });
-        console.log("USER " + user);
+        //console.log("USER " + user);
 
         if (!user || !user.password) {
           throw new Error("No user found");
@@ -54,7 +55,7 @@ const Options: NextAuthOptions = {
           user.password
         );
 
-        console.log("Match " + passwordMatch);
+        //console.log("Match " + passwordMatch);
         if (!passwordMatch) {
           throw new Error("incorrect password");
         }

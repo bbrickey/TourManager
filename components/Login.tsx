@@ -15,11 +15,16 @@ const INITIAL_DATA: FormData = {
 
 const Login = () => {
   const [data, setData] = useState(INITIAL_DATA);
+  const [users, setUsers] = useState([]);
 
   const loginUser = async (e: FormEvent) => {
     e.preventDefault();
     //console.log("Attempting Login...");
     signIn("credentials", { ...data, callbackUrl: "/add-income" });
+  };
+
+  const googleSignIn = async () => {
+    signIn("google", { ...data, callbackUrl: "/add-income" });
   };
 
   return (
@@ -58,6 +63,9 @@ const Login = () => {
             <button type="submit">Submit</button>
           </div>
         </form>
+      </div>
+      <div className="demo-link">
+        <button onClick={googleSignIn}>Sign In With Google</button>
       </div>
     </div>
   );
