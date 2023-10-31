@@ -1,23 +1,13 @@
-Tour Manager App
+## Tour Manager App
 
-Designed and built for Seattle band, Dead Bars by Benjamin Brickey 2023
+[Dead Bars Tour Manager](https://deadbarstourmanager.com/) is a custom web application designed for Seattle-based rock band
 
-Features:
+### Features
 
-- Tour & Event management - tracks date, venue, featured bands, attendance, & related income/expenses
-- Financial Ledger: tracks income/expenses/liabilities for tour, merchandise, recording, personell, marketing & loans
-- Reports: Enables band to view finances by date range, tour or specific event
+- Equips users with comprehensive financial management tools
+- Streamlines tour scheduling and provides easy access to historical data
+- Generates reports based on tour, event or time window to offer data-driven insights
 
-Built using NextJS framework - Typescript, Tailwind, Prisma (mysql), NextAuth authentication
+### Development
 
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- Built using NextJS framework: Typescript, React, Tailwind CSS, Prisma (mysql), NextAuth authentication
