@@ -2,12 +2,13 @@ import React from "react";
 import Ledger from "../../../components/Ledger";
 import Link from "next/link";
 import NavBar from "../../../components/NavBar";
+import ReportTool from "../../../components/ReportTool";
 
 const reports = () => {
   return (
     <div>
       <NavBar />
-      <h1>Reports</h1>
+      <ReportTool />
       <Ledger />
     </div>
   );

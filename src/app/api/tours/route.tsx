@@ -20,6 +20,9 @@ export async function GET(request: Request) {
       name: true,
       id: true,
     },
+    orderBy: {
+      start_date: "asc",
+    },
   });
   //console.log(res);
 

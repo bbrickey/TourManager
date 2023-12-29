@@ -584,3 +584,47 @@ text-decoration: none;
   color: purple;
   text-decoration: underline;
 }
+
+
+/*Report Tool */
+
+.report-tool {
+  border: 1px solid white;
+  border-radius: 1%;
+  margin: 1rem;
+  padding: 1rem;
+}
+
+.report-tool h1 {
+  font-size: 1.5rem;
+}
+
+.report-tool-datepicker input, label {
+  margin: rem;
+}
+
+.report-chart {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.report-chart-items {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 500px) {
+  .report-tool-datepicker {
+    display:flex;
+    flex-direction:column;
+  }
+  .report-chart {
+    display: flex;
+    flex-direction: column;
+  }
+  .report-chart-items {
+   padding: 1rem;
+  }
+}

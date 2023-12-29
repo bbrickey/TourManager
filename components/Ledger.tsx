@@ -135,6 +135,7 @@ const Ledger = () => {
 
   return (
     <div className="ledger-container">
+      <h1>Itemized Report</h1>
       <DataTable columns={columns} data={updatedLedgerData} />
     </div>
     /*

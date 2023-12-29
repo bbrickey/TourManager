@@ -35,6 +35,7 @@ const TourReport = ({ tourid }: TourLedgerProps) => {
   const getReportData = async () => {
     const queryParams = new URLSearchParams();
     queryParams.append("tourid", tourid);
+    //console.log(queryParams.toString());
     const url = `/api/tour-report-accounttype/?${queryParams.toString()}`;
     await fetch(url, {
       method: "GET",

@@ -132,7 +132,7 @@ const TourPage = ({ params: { tourid } }: Params) => {
         )}
       </div>
 
-      <div className="show-list">
+      <div className="tour-page">
         <h1>Shows</h1>
         <ul>
           {allEvents.length > 0 ? (
